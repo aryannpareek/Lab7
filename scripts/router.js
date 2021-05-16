@@ -35,30 +35,34 @@ router.setState = function(entry) {
    *    1. You may add as many helper functions in this file as you like
    *    2. You may modify the parameters of setState() as much as you like
    */
-  if (window.location.hash == ""){ 
+  if (window.location.hash == "") 
+  { 
     document.querySelector('body').setAttribute("class", "");  
     document.querySelector('h1').innerHTML = "Journal Entries"
   }
-  else if (window.location.hash == "#settings"){
+  else if (window.location.hash == "#settings") 
+  {
     document.querySelector('body').setAttribute("class", "settings"); 
     document.querySelector('h1').innerHTML = "Settings";
   }
-  else {
+  else 
+  {
     let entryNumber = 0;
-
     let entryArr = document.querySelectorAll('journal-entry');
 
-    for(let i = 0; i < entryArr.length; i++){
+    for(let i = 0; i < entryArr.length; i++) 
+    {
       if(entry.content == entryArr[i].entry.content 
          && entry.date == entryArr[i].entry.date 
-         && entry.title == entryArr[i].entry.title ){
+         && entry.title == entryArr[i].entry.title )
+      {
           entryNumber = i + 1;
       }
     }
     document.querySelector('body').setAttribute("class", "single-entry");
     document.querySelector('h1').innerHTML = "Entry " + entryNumber;
     document.querySelector('entry-page').remove(); 
-    
+
     let entryPage = document.createElement('entry-page'); 
     document.querySelector('body').appendChild(entryPage); 
     document.querySelector('entry-page').entry = entry;

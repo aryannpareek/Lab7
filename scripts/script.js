@@ -28,10 +28,12 @@ document.addEventListener('DOMContentLoaded', () => {
           let entryNumber = 0;
           let entryArr = document.querySelectorAll('journal-entry');
       
-          for(let i = 0; i < entryArr.length; i++){
+          for(let i = 0; i < entryArr.length; i++)
+          {
             if(entry.content == entryArr[i].entry.content 
                && entry.date == entryArr[i].entry.date 
-               && entry.title == entryArr[i].entry.title ){
+               && entry.title == entryArr[i].entry.title )
+            {
                 entryNumber = i + 1;
             }
           }
@@ -49,21 +51,25 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     document.querySelector('h1').addEventListener('click', ()=> { 
-      if (window.location.hash != ""){ 
+      if (window.location.hash != "")
+      { 
         window.history.pushState({page_id: 0}, "home", window.origin + "/Lab7/");
         setState(); 
       }
     });
 
-    window.addEventListener('popstate', (event)=>{
-      if (event.state == null){ 
+    window.addEventListener('popstate', (event)=> {
+      if (event.state == null)
+      { 
         setState(); 
         return;
       }
-      if (event.state.page_id == 1){
+      if (event.state.page_id == 1)
+      {
         setState(event.state.entry_id);
       }
-      else{
+      else
+      {
         setState(); 
       }
     });
