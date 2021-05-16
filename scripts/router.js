@@ -4,6 +4,7 @@ export const router = {};
 
 /**
  * Changes the "page" (state) that your SPA app is currently set to
+ * @param {int} pageId - The page-id you want to change to 
  */
 router.setState = function(entry) {
   /**
@@ -35,31 +36,49 @@ router.setState = function(entry) {
    *    1. You may add as many helper functions in this file as you like
    *    2. You may modify the parameters of setState() as much as you like
    */
+
+  //Set state to home 
   if (window.location.hash == ""){ 
+
+    //Stylize the page 
     document.querySelector('body').setAttribute("class", "");  
     document.querySelector('h1').innerHTML = "Journal Entries"
   }
+  //Set state to settings
   else if (window.location.hash == "#settings"){
+
+    //Set styling 
     document.querySelector('body').setAttribute("class", "settings"); 
     document.querySelector('h1').innerHTML = "Settings";
   }
+  //Set state to entry
   else {
-    let entryNumber = 0;
-
-    let allEntries = document.querySelectorAll('journal-entry');
-
-    for(let i = 0; i < allEntries.length; i++){
-      if(entry.content == allEntries[i].entry.content 
-         && entry.date == allEntries[i].entry.date 
-         && entry.title == allEntries[i].entry.title ){
-          entryNumber = i + 1;
-      }
-    }
+    let entryNum = router.findNum(entry); 
+    //set styling 
     document.querySelector('body').setAttribute("class", "single-entry");
-    document.querySelector('h1').innerHTML = "Entry " + entryNumber;
+    document.querySelector('h1').innerHTML = "Entry " + entryNum;
+
+    //Delete and recreate component 
     document.querySelector('entry-page').remove(); 
-    let entryPage = document.createElement('entry-page'); 
-    document.querySelector('body').appendChild(entryPage); 
+    let entryP = document.createElement('entry-page'); 
+    document.querySelector('body').appendChild(entryP); 
     document.querySelector('entry-page').entry = entry;
   }
- }
+
+}
+
+/**
+ * Helper function which finds entry number 
+ */
+router.findNum = function(entry){ 
+  //Get which number entry it is 
+  let entries = document.querySelector('main').children
+  let i; 
+  for (i = 0; i < 10; i++){ 
+    if (entries[i].entry.title == entry.title){ 
+      break;
+    }
+  }
+  let entryNum = (i + 1); 
+  return entryNum; 
+}
