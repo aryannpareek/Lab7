@@ -54,7 +54,7 @@ router.setState = function(entry) {
     {
       if(entry.content == entryArr[i].entry.content 
          && entry.date == entryArr[i].entry.date 
-         && entry.title == entryArr[i].entry.title )
+         && entry.title == entryArr[i].entry.title)
       {
           entryNumber = i + 1;
       }

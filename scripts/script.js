@@ -32,7 +32,7 @@ document.addEventListener('DOMContentLoaded', () => {
           {
             if(entry.content == entryArr[i].entry.content 
                && entry.date == entryArr[i].entry.date 
-               && entry.title == entryArr[i].entry.title )
+               && entry.title == entryArr[i].entry.title)
             {
                 entryNumber = i + 1;
             }
@@ -43,17 +43,17 @@ document.addEventListener('DOMContentLoaded', () => {
       });
     });
 
-    document.querySelector('img').addEventListener('click', ()=> {
-      if (window.location.hash != "#settings"){ 
-        window.history.pushState({page_id: 2}, "setting", "#settings"); 
-        setState(); 
-      }
-    });
-
     document.querySelector('h1').addEventListener('click', ()=> { 
       if (window.location.hash != "")
       { 
         window.history.pushState({page_id: 0}, "home", window.origin + "/Lab7/");
+        setState(); 
+      }
+    });
+
+    document.querySelector('img').addEventListener('click', ()=> {
+      if (window.location.hash != "#settings"){ 
+        window.history.pushState({page_id: 2}, "setting", "#settings"); 
         setState(); 
       }
     });
