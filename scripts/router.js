@@ -4,7 +4,6 @@ export const router = {};
 
 /**
  * Changes the "page" (state) that your SPA app is currently set to
- * @param {int} pageId - The page-id you want to change to 
  */
 router.setState = function(entry) {
   /**
@@ -36,49 +35,32 @@ router.setState = function(entry) {
    *    1. You may add as many helper functions in this file as you like
    *    2. You may modify the parameters of setState() as much as you like
    */
-
-  //Set state to home 
   if (window.location.hash == ""){ 
-
-    //Stylize the page 
     document.querySelector('body').setAttribute("class", "");  
     document.querySelector('h1').innerHTML = "Journal Entries"
   }
-  //Set state to settings
   else if (window.location.hash == "#settings"){
-
-    //Set styling 
     document.querySelector('body').setAttribute("class", "settings"); 
     document.querySelector('h1').innerHTML = "Settings";
   }
-  //Set state to entry
   else {
-    let entryNum = router.findNum(entry); 
-    //set styling 
-    document.querySelector('body').setAttribute("class", "single-entry");
-    document.querySelector('h1').innerHTML = "Entry " + entryNum;
+    let entryNumber = 0;
 
-    //Delete and recreate component 
+    let entryArr = document.querySelectorAll('journal-entry');
+
+    for(let i = 0; i < entryArr.length; i++){
+      if(entry.content == entryArr[i].entry.content 
+         && entry.date == entryArr[i].entry.date 
+         && entry.title == entryArr[i].entry.title ){
+          entryNumber = i + 1;
+      }
+    }
+    document.querySelector('body').setAttribute("class", "single-entry");
+    document.querySelector('h1').innerHTML = "Entry " + entryNumber;
     document.querySelector('entry-page').remove(); 
-    let entryP = document.createElement('entry-page'); 
-    document.querySelector('body').appendChild(entryP); 
+    
+    let entryPage = document.createElement('entry-page'); 
+    document.querySelector('body').appendChild(entryPage); 
     document.querySelector('entry-page').entry = entry;
   }
-
-}
-
-/**
- * Helper function which finds entry number 
- */
-router.findNum = function(entry){ 
-  //Get which number entry it is 
-  let entries = document.querySelector('main').children
-  let i; 
-  for (i = 0; i < 10; i++){ 
-    if (entries[i].entry.title == entry.title){ 
-      break;
-    }
-  }
-  let entryNum = (i + 1); 
-  return entryNum; 
-}
+ }

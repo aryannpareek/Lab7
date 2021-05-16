@@ -1,1 +1,3 @@
-# Lab7_Solution
+# Lab7 Solution
+Aryan Pareek
+
